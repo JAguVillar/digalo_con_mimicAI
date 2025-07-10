@@ -1,7 +1,10 @@
 <script setup>
+import { ref } from 'vue'
 import { RouterView } from 'vue-router'
 import BackIcon from '@/components/icons/BackIcon.vue'
 import BottomNav from './components/BottomNav.vue'
+
+const showDisclaimer = ref(true)
 
 import '@fontsource/dm-sans/100.css'
 import '@fontsource/dm-sans/200.css'
@@ -36,6 +39,31 @@ import '@fontsource/dm-sans/900.css'
         >
       </h1>
     </div>
+    <transition name="fade">
+      <div
+        v-if="showDisclaimer"
+        class="fixed inset-0 z-50 bg-black/80 flex items-center justify-center px-4"
+      >
+        <div class="bg-purple-200 text-purple-900 w-full rounded-lg p-4 font-bold mb-4">
+          <p>Recuerda que las mímicas deben ser lo menos literales posible 🎭❌📣</p>
+          <p>Nada de señalar el cielo si es Interestelar 🌌👆 y cosas por el estilo.</p>
+          <div class="flex flex-col items-center">
+            <button
+              class="mt-4 w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-pink-300 text-white font-medium"
+              @click="showDisclaimer = !showDisclaimer"
+            >
+              ¡Entendido! ☺️
+            </button>
+            <button
+              class="mt-4 w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-red-400 text-white font-medium"
+              @click="showDisclaimer = !showDisclaimer"
+            >
+              Entendido, pero en rojo 😡
+            </button>
+          </div>
+        </div>
+      </div>
+    </transition>
   </header>
   <RouterView />
   <BottomNav />
